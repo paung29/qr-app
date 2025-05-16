@@ -1,0 +1,59 @@
+http://localhost:8080/login
+
+	Basic Auth
+
+	post -> {
+	  "username": "admin@gmail.com",
+	  "password": "admin@123"
+	}
+	{
+    "success": true,
+    "message": "authentication success",
+    "data": null
+	}
+	
+http://localhost:8080/admin
+
+	post -> {
+			  "bankName": "AYA Bank",
+			  "accountHolderName": "John",
+			  "accountNumber": "123456789012",
+			  "accountType": "Savings",
+			  "nrcNumber": "12/PaTaNa(N)123456",
+			  "address": "No. 45, Bago",
+			  "issueBranch": "Bago Branch",
+			  "issueDate": "2024-12-01",
+			  "dateOfBalance": "2024-12-15",
+			  "balance": "5000000",
+			  "balanceInWords": "Five million kyats only",
+			  "validDate": "2025-01-15"
+			}
+	{
+    "success": true,
+    "message": "data saved",
+    "data": "1139e7d5-d946-4ce0-b222-8b8f45a33941"
+	}
+	
+http://localhost:8080/user/public/view/{token}
+
+
+	get -> {
+    "success": true,
+    "message": "Data found",
+    "data": {
+        "bankName": "AYA Bank",
+        "accountHolderName": "Sai Thei Yar Tun",
+        "accountNumber": "123456789012",
+        "accountType": "Savings",
+        "nrcNumber": "12/PaTaNa(N)123456",
+        "address": "No. 45, Bogyoke Road, Kyaukme",
+        "issueBranch": "Kyaukme Branch",
+        "issueDate": "2024-12-01",
+        "dateOfBalance": "2024-12-15",
+        "balance": "5000000",
+        "balanceInWords": "Five million kyats only",
+        "validDate": "2025-01-15"
+		    }
+		}
+		
+		
