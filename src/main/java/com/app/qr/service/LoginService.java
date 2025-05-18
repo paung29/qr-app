@@ -18,7 +18,7 @@ public class LoginService {
 	private final AccountRepo accountRepo;
 	private final PasswordEncoder passwordEncoder;
 	
-	@Transactional
+	@Transactional(readOnly = true)
 	public ApiResponse login(LoginForm form) {
 		
 		var isAccountExist = accountRepo.existsById(form.getUsername());
