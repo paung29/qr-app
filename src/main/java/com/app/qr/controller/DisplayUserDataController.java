@@ -19,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("user")
+@RequestMapping("advice")
 public class DisplayUserDataController {
 	
 	private final DisplayUserDataService service;
 	
-	@GetMapping("public/view/{token}")
+	@GetMapping("document/{token}")
 	private ResponseEntity<ApiResponse> show(@PathVariable String token){
 		
 		
