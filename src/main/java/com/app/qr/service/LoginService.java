@@ -10,7 +10,6 @@ import com.app.qr.model.entity.Account;
 import com.app.qr.model.repo.AccountRepo;
 
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 
 @Service
 @RequiredArgsConstructor

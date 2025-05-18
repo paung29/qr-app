@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.app.qr.model.entity.consts.Role;
 
@@ -15,27 +17,41 @@ import com.app.qr.model.entity.consts.Role;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
-	
+
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
+
 		http
-        .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(req -> req
-            .requestMatchers("/", "/login", "/resources/**").permitAll()
-            .requestMatchers("/user/public/view/**").permitAll() 
-            .requestMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
-            .anyRequest().authenticated()
-        )
-        .formLogin(form -> form.disable())
-        .httpBasic(Customizer.withDefaults());
+				.csrf(csrf -> csrf.disable())
+				.cors(Customizer.withDefaults())
+				.authorizeHttpRequests(req -> req
+						.requestMatchers("/", "/login", "/resources/**").permitAll()
+						.requestMatchers("/user/public/view/**").permitAll()
+						.requestMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+						.anyRequest().authenticated()
+				)
+				.formLogin(form -> form.disable())
+				.httpBasic(Customizer.withDefaults());
 
 		return http.build();
 	}
-	
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-    }
+	}
+
+	@Bean
+	WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+						.allowedOriginPatterns("*")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+						.allowedHeaders("*");
+			}
+		};
+	}
 
 }
