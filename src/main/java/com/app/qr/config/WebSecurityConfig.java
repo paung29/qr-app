@@ -26,7 +26,7 @@ public class WebSecurityConfig {
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(req -> req
 						.requestMatchers("/", "/login", "/resources/**").permitAll()
-						.requestMatchers("/user/public/view/**").permitAll()
+						.requestMatchers("/advice/document/**").permitAll()
 						.requestMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
 						.anyRequest().authenticated()
 				)
